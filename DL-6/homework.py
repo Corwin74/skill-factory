@@ -7,8 +7,8 @@ import os
 
 # MODEL
 #BATCH_SIZE  = 32
-EPOCH       = 3
-VAL_SPLIT   = 0.10  #15%
+EPOCH       = 4
+VAL_SPLIT   = 0.01  #15%
 
 # TOKENIZER
 # The maximum number of words to be used. (most frequent)
@@ -16,7 +16,7 @@ MAX_WORDS = 20000
 # Max number of words in each complaint.
 MAXLEN    = 120
 
-DATA_PATH = 'input/'
+DATA_PATH = 'data/'
 PATH      = 'working/'
 train = pd.read_csv(DATA_PATH+'train.csv',)
 test = pd.read_csv(DATA_PATH+'test.csv',)
@@ -37,7 +37,7 @@ train.to_csv('train_df.csv', index=False)
                                                                    ngram_range=1)
 model = text.text_classifier('bert', (x_train, y_train), preproc=preproc, )
 learner = ktrain.get_learner(model, train_data=(x_train, y_train), val_data=(x_test, y_test))
-learner.autofit(1e-5, EPOCH)
+learner.autofit(2e-5, EPOCH)
 learner.save_model('model_1')
 predictor = ktrain.get_predictor(learner.model, preproc)
 predictor.save('predictor_1')
