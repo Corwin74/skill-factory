@@ -43,7 +43,7 @@ google-auth-oauthlib==0.4.1
 google-pasta==0.2.0
 grpcio==1.32.0
 h5py==2.10.0
-httplib2==0.14.0
+httplib2==0.18.0
 idna==2.8
 ImageDataAugmentor @ git+https://github.com/Corwin74/ImageDataAugmentor.git@8579ead024a021aac825f6f0a3befe6ea307783d
 imageio==2.9.0
