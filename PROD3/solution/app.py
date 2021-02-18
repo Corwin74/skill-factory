@@ -1,11 +1,10 @@
 from flask import Flask, request, jsonify
-import datetime, pickle
+import datetime, pickle, numpy as np
 
 with open('hw1.pkl', 'rb') as f:
     model = pickle.load(f)
 
 app = Flask(__name__)
-
 
 @app.route('/hello')
 def hello_func():
@@ -18,11 +17,12 @@ def current_time():
 
 @app.route('/predict', methods=['POST'])
 def predict_func():
-    num = request.json.get('num')
-    print(request.json)
+    num = request.json
+    num = np.array(num).reshape(1,-1)
+    y = model.predict(num)
     return  jsonify({
-        'prediction': 0.25
+        'prediction': y[0]
         })
 
 if __name__ == '__main__':
-    app.run('localhost', 5000)
+    app.run(host='0.0.0.0', port=5000)
