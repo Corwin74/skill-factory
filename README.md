@@ -1,1 +1,1 @@
-# skill-factory
+# Учебные упражнения курса "Data Science" 
